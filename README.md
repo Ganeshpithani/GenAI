@@ -177,9 +177,201 @@ Markdown(response.choices[0].message.content)
 
 ---
 
+## Day 3 - LLM Generation Control & Prompt Engineering
+
+### What I Learned
+
+- How LLMs generate text token by token
+- Parameters to control output behavior
+- Writing effective prompts
+- Advanced prompting techniques
+
+---
+
+### How LLMs Generate Text
+
+- LLMs generate text one word at a time
+- Each word is chosen based on probability
+
+**Two methods:**
+
+- **Greedy** — Picks the highest probability word (safe, repetitive)
+- **Sampling** — Picks randomly from probable words (creative, varied)
+
+---
+
+### Temperature (Creativity Control)
+
+Controls how random the output is:
+
+| Temperature | Behavior |
+|---|---|
+| 0.0 | Same output every time (no creativity) |
+| 0.1 – 0.5 | Focused, accurate |
+| 0.7 – 1.0 | Balanced |
+| 1.0+ | Very creative (can be unpredictable) |
+
+**Rule:** Lower = Safe, Higher = Creative
+
+---
+
+### Top-K Sampling
+
+- Limits choices to the top K most likely words
+- Example: `k = 50`
+
+**Problem:** Fixed limit, does not adapt to context.
+
+---
+
+### Top-P (Nucleus Sampling)
+
+- Chooses the smallest set of words whose total probability equals P
+- Example: `p = 0.8`
+
+**Why it is better:**
+
+- Adapts to context
+- Produces more natural output
+
+---
+
+### Template + Low Temperature
+
+Structured prompts give better results:
+
+```python
+Q: {question}
+A:
+```
+
+Use low temperature (0.1 – 0.3) for clean and repeatable output.
+
+---
+
+### My Experiment
+
+- Default temperature → Output changes each time
+- Low temperature (0.1) → Same output repeated
+
+**Conclusion:**
+
+- Low temperature = consistent output
+- High temperature = creative output
+
+---
+
+### Key Idea
+
+Temperature + Top-K + Top-P = Full control over AI output
+
+---
+
+### Prompt Engineering
+
+#### Writing Better Prompts
+
+**Bad:**
+
+```
+"Tell me about cars"
+```
+
+**Good:**
+
+```
+"List 3 benefits of electric cars in city driving in bullet points"
+```
+
+Clear prompts produce better answers.
+
+---
+
+#### 5 Key Parts of a Good Prompt
+
+- Clear wording
+- Short but detailed
+- Assign a role
+- Define the goal
+- Use positive and negative instructions
+
+**Example:**
+
+```
+"Act as a friendly teacher. Explain gravity to a 10-year-old. Do NOT use hard words."
+```
+
+---
+
+### Advanced Prompting Techniques
+
+#### Zero-Shot Prompting
+
+No examples given:
+
+```
+"Translate to Hindi: How are you?"
+```
+
+#### Few-Shot Prompting
+
+Provide examples before asking:
+
+```
+"happy → positive
+sad → negative
+excited → ?"
+```
+
+#### Chain of Thought (CoT)
+
+Ask the model to think step by step:
+
+```
+"Solve 25 + (18 / 3) - 7 step by step"
+```
+
+#### Self-Consistency CoT
+
+- Solve the same problem multiple times
+- Pick the most common answer
+
+Improves accuracy on reasoning tasks.
+
+#### Tree of Thoughts (ToT)
+
+- Explore multiple solution paths
+- Compare and choose the best
+
+```
+"Give 3 plans (A, B, C), compare them, and pick the best one"
+```
+
+---
+
+### Final Takeaways
+
+- Prompt controls what the AI does
+- Temperature controls creativity
+- Top-K and Top-P control word selection
+- Advanced prompting improves reasoning and accuracy
+
+---
+
+### Summary
+
+Today I learned how to control LLM outputs using temperature, Top-K, Top-P, better prompt writing, and advanced prompting techniques.
+
+**Progress: Day 3 Completed**
+
+**Next: Practical Implementations**
+
+---
+
 ## Progress Tracker
 
 | Day | Topic | Status |
 |---|---|---|
 | 1 | Google GenAI (Gemini) | Completed |
 | 2 | Groq LLM Practice | Completed |
+| 3 | LLM Generation Control & Prompt Engineering | Completed |
