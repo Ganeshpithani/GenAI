@@ -368,6 +368,70 @@ Today I learned how to control LLM outputs using temperature, Top-K, Top-P, bett
 
 ---
 
+## Day 4 - Multi-Model LLM Integration using LangChain
+
+### Overview
+
+This project demonstrates the unified approach of LangChain to integrate and swap multiple Large Language Model (LLM) providers with zero friction. A translation workflow was implemented that remains consistent across proprietary, high-speed, and open-source models.
+
+---
+
+### Key Learnings
+
+#### 1. The Plug-and-Play Architecture
+
+The core takeaway is that LangChain is model-agnostic. The application logic is decoupled from the model engine. By using a unified interface, switching between the following providers requires minimal changes:
+
+- **Google Generative AI (Gemini)** — For high-reasoning proprietary tasks
+- **Groq (Llama/Mixtral)** — For ultra-fast LPU-powered inference
+- **Hugging Face (DeepSeek-V4-Pro)** — For leveraging frontier open-source models
+
+---
+
+#### 2. Standardized Workflow
+
+Regardless of the provider, the implementation follows a consistent 4-step process:
+
+1. **Secure Credential Management** — Using `userdata.get` and `os.environ` to handle API keys safely
+2. **Unified Instantiation** — Swapping classes (e.g., `ChatGoogleGenerativeAI` to `ChatGroq`) while keeping parameters similar
+3. **Message-Based Prompting** — Using a list of tuples `(system, human)` to maintain consistent context across different model architectures
+4. **Universal Invocation** — Using the `.invoke()` method and `.content` attribute to ensure the application remains stable during model migration
+
+---
+
+#### 3. Model Interoperability
+
+A single prompt — translating English to Telugu — can be benchmarked across different infrastructures without rewriting any of the system or human messages.
+
+---
+
+### Tools & Technologies
+
+| Category | Details |
+|---|---|
+| Framework | LangChain |
+| Language | Python |
+| Integrations | `langchain-google-genai`, `langchain-groq`, `langchain-huggingface` |
+| Models Tested | Gemini, Llama-3.1, DeepSeek-V4-Pro |
+
+---
+
+### Future Application
+
+This knowledge enables cost and performance optimization. In a production environment:
+
+- Use expensive models for complex logic
+- Switch to Groq for speed-critical tasks
+- Deploy open-source models via Hugging Face for privacy and flexibility
+
+---
+
+**Progress: Day 4 Completed**
+
+**Next: Advanced LangChain Workflows**
+
+---
+
 ## Progress Tracker
 
 | Day | Topic | Status |
@@ -375,3 +439,4 @@ Today I learned how to control LLM outputs using temperature, Top-K, Top-P, bett
 | 1 | Google GenAI (Gemini) | Completed |
 | 2 | Groq LLM Practice | Completed |
 | 3 | LLM Generation Control & Prompt Engineering | Completed |
+| 4 | Multi-Model LLM Integration using LangChain | Completed |
